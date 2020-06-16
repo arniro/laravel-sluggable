@@ -84,7 +84,7 @@ trait Sluggable
     }
 
     /**
-     * Get sluggable attribute's locals that should be slugged.
+     * Get sluggable attribute's locales that should be slugged.
      *
      * @return array
      */
@@ -96,14 +96,27 @@ trait Sluggable
             return $locales;
         }
 
-        $original = $this->fromJson(Arr::get($this->getOriginal(), $this->getSluggable(), '[]'));
-        $dirty = $this->fromJson(Arr::get($this->getDirty(), $this->getSluggable(), '[]'));
+        $original = $this->normalizeJson($this->getOriginal());
+        $dirty = $this->normalizeJson($this->getDirty());
 
         $changed = array_filter($dirty, function ($attribute, $locale) use ($original) {
             return $attribute !== Arr::get($original, $locale);
         }, ARRAY_FILTER_USE_BOTH);
 
         return array_keys($changed);
+    }
+
+    /**
+     * Convert a json string to an array if it's not.
+     *
+     * @param array|string $data
+     * @return mixed
+     */
+    protected function normalizeJson($data)
+    {
+        $value = Arr::get($data, $this->getSluggable(), '[]');
+
+        return is_string($value) ? $this->fromJson($value) : $value;
     }
 
     /**

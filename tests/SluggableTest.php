@@ -3,6 +3,7 @@
 namespace Arniro\Sluggable\Tests;
 
 use Arniro\Sluggable\Tests\Fixtures\Product;
+use Arniro\Sluggable\Tests\Fixtures\TranslatableProduct;
 use Spatie\Translatable\HasTranslations;
 
 class SluggableTest extends TestCase
@@ -69,8 +70,6 @@ class SluggableTest extends TestCase
     public function it_saves_slug_for_all_locales_if_a_column_is_translatable()
     {
         $product = new class extends Product {
-            use HasTranslations;
-
             public $translatable = ['name', 'slug'];
         };
 
@@ -89,8 +88,6 @@ class SluggableTest extends TestCase
     public function a_generated_slug_for_a_translatable_attribute_should_be_unique()
     {
         $product = new class extends Product {
-            use HasTranslations;
-
             public $translatable = ['name', 'slug'];
         };
 
@@ -119,13 +116,7 @@ class SluggableTest extends TestCase
     /** @test */
     public function slug_should_not_be_changed_if_the_value_of_translatable_attribute_is_not_changed_during_update()
     {
-        $product = new class extends Product {
-            use HasTranslations;
-
-            public $translatable = ['name', 'slug'];
-        };
-
-        $product = $product->create([
+        $product = TranslatableProduct::create([
             'name' => [
                 'en' => 'Product',
                 'ru' => 'Product Ru'
