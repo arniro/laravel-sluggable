@@ -2,7 +2,7 @@
     "name": "arniro/laravel-sluggable",
     "description": "A package to generate a slug for Laravel models. Translatable columns are also supported.",
     "license": "MIT",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "authors": [
         {
             "name": "Artyom Nishchuk",
@@ -13,7 +13,7 @@
     "homepage": "https://github.com/arniro/laravel-sluggable",
     "keywords": ["Laravel", "Sluggable", "Translatable"],
     "require": {
-        "illuminate/support": "~5|~6|~7"
+        "illuminate/support": ">=5.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0",
