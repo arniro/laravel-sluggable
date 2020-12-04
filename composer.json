@@ -13,7 +13,7 @@
     "homepage": "https://github.com/arniro/laravel-sluggable",
     "keywords": ["Laravel", "Sluggable", "Translatable"],
     "require": {
-        "illuminate/support": "~5|~6|~7"
+        "illuminate/support": ">=5.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.0",
